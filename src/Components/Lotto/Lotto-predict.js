@@ -11,7 +11,7 @@ function LottoPredict() {
     let lotto = [];
     while (lotto.length < 6) {
       const r = Math.floor((Math.random() * 58) + 1);
-      const i = lotto.findIndex((x) => x == r);
+      const i = lotto.findIndex((x) => x === r);
       console.log(r, i)
       if (i === -1) { lotto.push(r); }
     }

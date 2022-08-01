@@ -27,12 +27,12 @@ function LottoPredict() {
   const tensorA = tf.tensor(lottos);
   
   return (
-    <div className='center'>
+    <div>
       <h2>Tensor data {tensorA.rank} {tensorA.shape} </h2>
       <button onClick={() => createLottoIem()}>
         Add Number
       </button>
-      <div className='lotto-list'>
+      <div>
         <ol>
           {listLotos(lottos)}
         </ol>

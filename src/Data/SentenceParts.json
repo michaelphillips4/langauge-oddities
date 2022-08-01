@@ -1,9 +1,10 @@
 {
 "article":["the", "a"],
-"noun":["desk", "chair", "envelope", "car", "train", "bus", "boat","elephant", "dog", "cat", "moose", "rabbit","weasel","shrew","owl","otter","pussy cat","rocket"],
 "verb":["ran", "jumped", "walked", "sprinted", "skipped","flew","danced","sung","wallowed"],
-"adjective":["brave", "yellow", "fast", "faithful", "fit"],
-"preposition":["after", "before", "on", "under", "inside" , "to", "from", "across", "outside"]
-
+"adjective":["angry","arrogant","attractive","brave","bewildered","creepy", "yellow", "fast", "faithful", "fit","death"],
+"preposition":["after", "before", "on", "under", "inside" , "to", "from", "across", "outside"],
+"common_noun":[ "boy", "country", "bridge", "city", "birth", "day", "happiness","car", "boat", "rocket","monster","tree","ghost"],
+"proper_noun":["Fred", "Sid", "Wendy","Bob","Steven","Africa","Monday","Friday"],
+"concrete_noun":["elephant","owl","otter","pussy cat", "cat", "moose", "rabbit","weasel","shrew","dog","train", "bus","tank","submarine", "building", "coffee", "tree", "rain", "beach", "tune"]
 }
 

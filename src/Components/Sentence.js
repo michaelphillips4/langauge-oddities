@@ -1,96 +1,141 @@
-import data from "../Data/SentenceParts.json" ;
+import data from "../Data/SentenceParts.json";
 import React, { useState } from 'react';
 
 function Sentence() {
 
-    const [sentences, setSentences] = useState([]);
-    let lastRand = 0;  
+  const [poem, setPoem] = useState({
+    numberOfLines: 0,
+    lines: []
+  });
+  const [usedValues, setUsedValues] = useState({});
 
-    const getRand = () =>
-    {
-     let r = Math.random(); 
-     while(r === lastRand)
-     {
-       r = Math.random();
-     }
-     lastRand = r;
-     return r;
+  let lastRand = 0;
+
+  const getRand = () => {
+    let r = Math.random();
+    while (r === lastRand) {
+      r = Math.random();
     }
-
-
-
-    const getRandFromArray =(array) =>{
-        const r = Math.floor((getRand() * array.length -1) + 1);
-        return array[r];
-    }
-
-    //const nounPhrase = () => `${getRandFromArray(data.determiner)} ${getRandFromArray(data.proper_noun)} ${getRandFromArray(data.common_noun)}`;
- 
-    //const verbPhrase = () => `${getRandFromArray(data.intransitive_verb)} ${getRandFromArray(data.transitive_verb)} ${nounPhrase()}` ;   
-
-
-    const phrase = () => 
-    `The  
-    ${getRandFromArray(data.adjective)}
-    ${getRandFromArray(data.concrete_noun)} 
-    ${getRandFromArray(data.verb)} 
-    ${getRandFromArray(data.preposition)} 
-    ${getRandFromArray(data.article)} 
-    ${getRandFromArray(data.adjective)} 
-    ${getRandFromArray(data.common_noun)}`
-
-
-    const simple = () => 
-    `${getRandFromArray(data.article)} 
-     ${getRandFromArray(data.common_noun)} 
-     ${getRandFromArray(data.verb)}`
-
-     const simple2 = () => 
-     `${getRandFromArray(data.proper_noun)} 
-      ${getRandFromArray(data.verb)} 
-      ${getRandFromArray(data.preposition)}
-      ${getRandFromArray(data.article)} 
-      ${getRandFromArray(data.common_noun)
-      }`
-      const simple3 = () => 
-      `${getRandFromArray(data.article)} 
-       ${getRandFromArray(data.common_noun)} 
-       ${getRandFromArray(data.verb)}
-       ${getRandFromArray(data.preposition)}
-       ${getRandFromArray(data.article)} 
-       ${getRandFromArray(data.concrete_noun)}`
-
-   const toSentenceCase = (s) => s
-   .split(' ')
-   .map((word,i)=> i === 0 ? word.charAt(0).toUpperCase() + word.slice(1): word);
-
-
-
-
-    const addSentence =() => {
-      const clone = Array.from(sentences);
-      clone.push(toSentenceCase(phrase()));
-      clone.push(toSentenceCase(simple()));
-      clone.push(toSentenceCase(simple2()));
-      clone.push(toSentenceCase(simple3()));
-      setSentences(clone);
- 
-    }
-  
-    const listSentences = (a) => a.map((s, index) => <li key={index}>{s}.</li>)
-  
-    
-    return (
-      <div> 
-        <h2>Sentence creator</h2>
-        <button onClick={() => addSentence()}>
-          Add Sentence
-        </button>
-          <ol >
-            {listSentences(sentences)}
-          </ol>
-        </div>
-    );
+    lastRand = r;
+    return r;
   }
-  
-  export default Sentence;
+
+  const getRandFromArrayInner = (array) => array[Math.floor((getRand() * array.length - 1) + 1)];
+
+  const tryGetUnusedValue = (array, name) => {
+
+    let value = getRandFromArrayInner(array);
+
+    if (usedValues.hasOwnProperty(name) && usedValues[name].length < array.length) {
+
+      while (usedValues[name].includes(value)) {
+        value = getRandFromArrayInner(array);
+      }
+    }
+
+    return value;
+  }
+
+  const setUnusedValues = (name, value) => {
+    const clone = usedValues;
+    if (!clone.hasOwnProperty(name)) {
+      clone[name] = [];
+    }
+    clone[name].push(value);
+    setUsedValues(clone);
+  }
+
+  const getRandFromArray = (array, name) => {
+    let value = tryGetUnusedValue(array, name);
+    setUnusedValues(name, value);
+    return value;
+  }
+
+
+  const randomRange = (min, max) => Math.floor(Math.random() * (max - min) + min);
+
+
+  const simple = () => `The ${getRandFromArray(data.adjective, "adjective")} ${getRandFromArray(data.concrete_noun, "concrete_noun")} ${getRandFromArray(data.verb, "verb")} ${getRandFromArray(data.preposition, "preposition")} ${getRandFromArray(data.article, "article")} ${getRandFromArray(data.adjective, "adjective")} ${getRandFromArray(data.common_noun, "common_noun")}`
+
+  const simple1 = () => `${getRandFromArray(data.article, "article")} ${getRandFromArray(data.common_noun, "common_noun")} ${getRandFromArray(data.verb, "verb")}`
+
+  const simple2 = () => `${getRandFromArray(data.proper_noun, "common_noun")} ${getRandFromArray(data.verb, "verb")} ${getRandFromArray(data.preposition, "preposition")} ${getRandFromArray(data.article, "article")} ${getRandFromArray(data.adjective, "adjective")} ${getRandFromArray(data.common_noun, "common_noun")}`
+
+  const simple3 = () => `${getRandFromArray(data.article, "article")} ${getRandFromArray(data.common_noun, "common_noun")} ${getRandFromArray(data.verb, "verb")} ${getRandFromArray(data.preposition, "preposition")} ${getRandFromArray(data.article, "article")} ${getRandFromArray(data.common_noun, "common_noun")}`
+
+  const simple4 = () => simple + ", " + simple3()
+
+
+  const toSentenceCase = (s) => s
+    .split(' ')
+    .map((word, i) => i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word).join(" ");
+
+
+  const createPoem = () => {
+    const numLines = randomRange(4, 10);
+    let d = {};
+    d.numberOfLines = numLines;
+    d.lines = [];
+    for (let i = 0; i < numLines; i++) {
+      const numType = randomRange(0, 4);
+      const lineInfo = {};
+      if (numType === 0) { lineInfo.text = toSentenceCase(simple() + "."); }
+      else if (numType === 1) { lineInfo.text = toSentenceCase(simple1() + "."); }
+      else if (numType === 2) { lineInfo.text = toSentenceCase(simple2() + "."); }
+      else if (numType === 3) { lineInfo.text = toSentenceCase(simple3() + "."); }
+      else if (numType === 4) { lineInfo.text = toSentenceCase(simple4() + "."); }
+      lineInfo.type = numType
+      d.lines.push(lineInfo);
+    }
+    return d;
+  }
+
+
+  const nextPoem = () => {
+
+    let c = usedValues; 
+    
+    for(var k in c)
+    {
+       delete c[k];
+    }
+    
+    setUsedValues(c);
+    console.log(usedValues);
+    setPoem(createPoem());
+  }
+
+
+  const displayPoem = (a) => a.map((s, index) => <div key={index}>{s.text}</div>)
+
+  const displayPoemInfo = (a) => a.map((s, index) => <li key={index}><i>Type : {s.type}</i> -- {s.text} </li>)
+
+  const displayUsedValuesInfo = (a) => Object.keys(a).map((s) => <li key={s}><i>{s}</i>: {a[s].join(",")} </li>)
+
+  // console.log(poem.usedValues);
+
+  return (
+    <div >
+      <div className="center">
+        <h1>Poem Generator </h1>
+        <a href="#" onClick={() => nextPoem()}>
+          Create a poem
+        </a>
+        <div className="poem">
+        {displayPoem(poem.lines)}
+        </div>
+        <div className="info">
+          <h2 className="center">Info </h2>
+          <h5>Types in {poem.numberOfLines} line poem</h5>
+          <ul>{displayPoemInfo(poem.lines)}</ul>
+          <h5>Data set</h5>
+          <ul>{displayUsedValuesInfo(data)}</ul>
+          <h5>Data set - used Values</h5>
+          <ul>{displayUsedValuesInfo(usedValues)}</ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Sentence;

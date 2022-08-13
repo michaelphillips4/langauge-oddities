@@ -5,16 +5,9 @@ import Sentence from './Components/Sentence';
 function App() {
   return (
     <div >
-    
-
-    
+        
     <Sentence />
-
-    <LottoPredict />
-
-    
-
-
+  
     </div>
   );
 }

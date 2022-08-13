@@ -93,13 +93,12 @@ function Sentence() {
 
   const nextPoem = () => {
 
-    let c = usedValues; 
-    
-    for(var k in c)
-    {
-       delete c[k];
+    let c = usedValues;
+
+    for (var k in c) {
+      delete c[k];
     }
-    
+
     setUsedValues(c);
     console.log(usedValues);
     setPoem(createPoem());
@@ -110,7 +109,7 @@ function Sentence() {
 
   const displayPoemInfo = (a) => a.map((s, index) => <li key={index}><i>Type : {s.type}</i> -- {s.text} </li>)
 
-  const displayUsedValuesInfo = (a) => Object.keys(a).map((s) => <li key={s}><i>{s}</i>: {a[s].join(",")} </li>)
+  const displayUsedValuesInfo = (a) => Object.keys(a).map((s) => <li key={s}><i>{s}</i>: {a[s].join(", ")} </li>)
 
   // console.log(poem.usedValues);
 
@@ -118,20 +117,28 @@ function Sentence() {
     <div >
       <div className="center">
         <h1>Poem Generator </h1>
-        <a href="#" onClick={() => nextPoem()}>
-          Create a poem
-        </a>
+        <button className="button" onClick={() => nextPoem()}>
+          Create New
+        </button>
         <div className="poem">
-        {displayPoem(poem.lines)}
+          {displayPoem(poem.lines)}
         </div>
         <div className="info">
           <h2 className="center">Info </h2>
           <h5>Types in {poem.numberOfLines} line poem</h5>
           <ul>{displayPoemInfo(poem.lines)}</ul>
-          <h5>Data set</h5>
-          <ul>{displayUsedValuesInfo(data)}</ul>
           <h5>Data set - used Values</h5>
           <ul>{displayUsedValuesInfo(usedValues)}</ul>
+          <h5>Data set</h5>
+          <ul>{displayUsedValuesInfo(data)}</ul>
+          <h5>Type definitions</h5>
+          <ul>
+            <li>1 = The adjective concrete_noun verb preposition article adjective common_noun</li>
+            <li>2 = article common_noun verb</li>
+            <li>3 = common_noun verb preposition article adjective common_noun</li>
+            <li>4 =article common_noun verb preposition article common_noun</li>
+            <li>5 = 1 , 3 </li>
+          </ul>
         </div>
       </div>
     </div>

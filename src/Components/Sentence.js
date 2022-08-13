@@ -133,11 +133,11 @@ function Sentence() {
           <ul>{displayUsedValuesInfo(data)}</ul>
           <h5>Type definitions</h5>
           <ul>
-            <li>1 = The adjective concrete_noun verb preposition article adjective common_noun</li>
-            <li>2 = article common_noun verb</li>
-            <li>3 = common_noun verb preposition article adjective common_noun</li>
-            <li>4 =article common_noun verb preposition article common_noun</li>
-            <li>5 = 1 , 3 </li>
+            <li>1 = 'The' adjective concrete_noun verb preposition article adjective common_noun.</li>
+            <li>2 = article common_noun verb.</li>
+            <li>3 = common_noun verb preposition article adjective common_noun.</li>
+            <li>4 = article common_noun verb preposition article common_noun.</li>
+            <li>5 = Type 1 , Type 3 </li>
           </ul>
         </div>
       </div>

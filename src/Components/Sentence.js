@@ -63,7 +63,7 @@ function Sentence() {
 
   const simple3 = () => `${getRandFromArray(data.article, "article")} ${getRandFromArray(data.common_noun, "common_noun")} ${getRandFromArray(data.verb, "verb")} ${getRandFromArray(data.preposition, "preposition")} ${getRandFromArray(data.article, "article")} ${getRandFromArray(data.common_noun, "common_noun")}`
 
-  const simple4 = () => simple + ", " + simple3()
+  const simple4 = () => simple() + ", " + simple3()
 
 
   const toSentenceCase = (s) => s
@@ -76,14 +76,14 @@ function Sentence() {
     let d = {};
     d.numberOfLines = numLines;
     d.lines = [];
-    for (let i = 0; i < numLines; i++) {
+    for (let i = 0; i < numLines + 1; i++) {
       const numType = randomRange(0, 5);
       const lineInfo = {};
       if (numType === 0) { lineInfo.text = toSentenceCase(simple() + "."); }
       else if (numType === 1) { lineInfo.text = toSentenceCase(simple1() + "."); }
       else if (numType === 2) { lineInfo.text = toSentenceCase(simple2() + "."); }
       else if (numType === 3) { lineInfo.text = toSentenceCase(simple3() + "."); }
-      else if (numType === 4) { lineInfo.text = toSentenceCase(simple4() + "."); }
+      else if (numType === 4) { lineInfo.text = simple4() + "." }
       lineInfo.type = numType + 1;
       d.lines.push(lineInfo);
     }
@@ -124,12 +124,13 @@ function Sentence() {
           {displayPoem(poem.lines)}
         </div>
         <div className="info">
-          <h2 className="center">Info </h2>
-          <h5>Types in {poem.numberOfLines} line poem</h5>
+          <h2 className="center">Debug Trace Info </h2>
+          Created {poem.numberOfLines} line poem.
+          <h5>Types Generated</h5>
           <ul>{displayPoemInfo(poem.lines)}</ul>
           <h5>Data set - used Values</h5>
           <ul>{displayUsedValuesInfo(usedValues)}</ul>
-          <h5>Data set</h5>
+          <h5>Data set - all avaliable values</h5>
           <ul>{displayUsedValuesInfo(data)}</ul>
           <h5>Type definitions</h5>
           <ul>

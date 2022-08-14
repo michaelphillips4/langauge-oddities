@@ -77,14 +77,14 @@ function Sentence() {
     d.numberOfLines = numLines;
     d.lines = [];
     for (let i = 0; i < numLines; i++) {
-      const numType = randomRange(0, 4);
+      const numType = randomRange(0, 5);
       const lineInfo = {};
       if (numType === 0) { lineInfo.text = toSentenceCase(simple() + "."); }
       else if (numType === 1) { lineInfo.text = toSentenceCase(simple1() + "."); }
       else if (numType === 2) { lineInfo.text = toSentenceCase(simple2() + "."); }
       else if (numType === 3) { lineInfo.text = toSentenceCase(simple3() + "."); }
       else if (numType === 4) { lineInfo.text = toSentenceCase(simple4() + "."); }
-      lineInfo.type = numType
+      lineInfo.type = numType + 1;
       d.lines.push(lineInfo);
     }
     return d;

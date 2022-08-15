@@ -114,17 +114,20 @@ function Sentence() {
   // console.log(poem.usedValues);
 
   return (
-    <div >
-      <div className="center">
-        <h1>Poem Generator </h1>
+      <div><header id="header">      
+        <h1>Poem Generator</h1>
+        </header>  
+        <main>
         <button className="button" onClick={() => nextPoem()}>
           Create New
         </button>
         <div className="poem">
           {displayPoem(poem.lines)}
         </div>
-        <div className="info">
-          <h2 className="center">Debug Trace Info </h2>
+        </main>
+        <footer>
+        <details>
+        <summary>Debug Trace Info</summary>
           Created {poem.numberOfLines} line poem.
           <h5>Types Generated</h5>
           <ul>{displayPoemInfo(poem.lines)}</ul>
@@ -140,9 +143,9 @@ function Sentence() {
             <li>4 = article common_noun verb preposition article common_noun.</li>
             <li>5 = Type 1 , Type 3 </li>
           </ul>
-        </div>
+      </details>
+      </footer>
       </div>
-    </div>
   );
 }
 

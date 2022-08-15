@@ -144,6 +144,7 @@ function Sentence() {
             <li>5 = Type 1 , Type 3 </li>
           </ul>
       </details>
+      <a href ={process.env.PUBLIC_URL + '/eliza/eliza.html'}>Eliza</a>
       </footer>
       </div>
   );

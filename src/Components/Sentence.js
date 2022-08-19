@@ -114,19 +114,14 @@ function Sentence() {
   // console.log(poem.usedValues);
 
   return (
-      <div><header id="header">      
-        <h1>Poem Generator</h1>
-        </header>  
-        <main>
+      <div>
         <button className="button" onClick={() => nextPoem()}>
           Create New
         </button>
-        <div className="poem">
+        <blockquote>
           {displayPoem(poem.lines)}
-        </div>
-        </main>
-        <footer>
-        <details>
+        </blockquote>
+       <details>
         <summary>Debug Trace Info</summary>
           Created {poem.numberOfLines} line poem.
           <h5>Types Generated</h5>
@@ -144,8 +139,6 @@ function Sentence() {
             <li>5 = Type 1 , Type 3 </li>
           </ul>
       </details>
-      
-      </footer>
       </div>
   );
 }

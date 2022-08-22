@@ -1,12 +1,16 @@
 import data from "../Data/SentenceParts.json";
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
-function Sentence() {
+function PoemGenerator() {
 
-  const [poem, setPoem] = useState({
-    numberOfLines: 0,
-    lines: []
-  });
+  useEffect(() => {
+    const pageName = "Poem Generator"; 
+    document.title = pageName;  
+    document.getElementById("header").innerHTML = pageName
+  }, []);
+
+ 
+
   const [usedValues, setUsedValues] = useState({});
 
   let lastRand = 0;
@@ -57,13 +61,20 @@ function Sentence() {
 
   const simple = () => `The ${getRandFromArray(data.adjective, "adjective")} ${getRandFromArray(data.concrete_noun, "concrete_noun")} ${getRandFromArray(data.verb, "verb")} ${getRandFromArray(data.preposition, "preposition")} ${getRandFromArray(data.article, "article")} ${getRandFromArray(data.adjective, "adjective")} ${getRandFromArray(data.common_noun, "common_noun")}`
 
-  const simple1 = () => `${getRandFromArray(data.article, "article")} ${getRandFromArray(data.common_noun, "common_noun")} ${getRandFromArray(data.verb, "verb")}`
+  const simple1 = () => `${getRandFromArray(data.article, "article")} ${getRandFromArray(data.concrete_noun, "concrete_noun")} ${getRandFromArray(data.verb, "verb")}`
 
   const simple2 = () => `${getRandFromArray(data.proper_noun, "common_noun")} ${getRandFromArray(data.verb, "verb")} ${getRandFromArray(data.preposition, "preposition")} ${getRandFromArray(data.article, "article")} ${getRandFromArray(data.adjective, "adjective")} ${getRandFromArray(data.common_noun, "common_noun")}`
 
-  const simple3 = () => `${getRandFromArray(data.article, "article")} ${getRandFromArray(data.common_noun, "common_noun")} ${getRandFromArray(data.verb, "verb")} ${getRandFromArray(data.preposition, "preposition")} ${getRandFromArray(data.article, "article")} ${getRandFromArray(data.common_noun, "common_noun")}`
+  const simple3 = () => `${getRandFromArray(data.article, "article")} ${getRandFromArray(data.common_noun, "common_noun")} ${getRandFromArray(data.verb, "verb")} ${getRandFromArray(data.preposition, "preposition")} ${getRandFromArray(data.article, "article")} ${getRandFromArray(data.concrete_noun, "concrete_nou")}`
 
   const simple4 = () => simple() + ", " + simple3()
+
+  const simple5 = () => {
+    const noun = getRandFromArray(data.concrete_noun,"concrete_noun");
+    const f = "aeiou".includes(noun[0]) ? "An": "A";
+    return `${f} ${noun} ${getRandFromArray(data.verb,"verb")}`
+    
+  }
 
 
   const toSentenceCase = (s) => s
@@ -77,13 +88,14 @@ function Sentence() {
     d.numberOfLines = numLines;
     d.lines = [];
     for (let i = 0; i < numLines + 1; i++) {
-      const numType = randomRange(0, 5);
+      const numType = randomRange(0, 6);
       const lineInfo = {};
       if (numType === 0) { lineInfo.text = toSentenceCase(simple() + "."); }
       else if (numType === 1) { lineInfo.text = toSentenceCase(simple1() + "."); }
       else if (numType === 2) { lineInfo.text = toSentenceCase(simple2() + "."); }
       else if (numType === 3) { lineInfo.text = toSentenceCase(simple3() + "."); }
       else if (numType === 4) { lineInfo.text = simple4() + "." }
+      else if (numType === 5) { lineInfo.text = simple5() + "." }
       lineInfo.type = numType + 1;
       d.lines.push(lineInfo);
     }
@@ -113,6 +125,12 @@ function Sentence() {
 
   // console.log(poem.usedValues);
 
+  const [poem, setPoem] = useState({
+    numberOfLines: 0,
+    lines: []
+  });
+
+
   return (
       <div>
         <button className="button" onClick={() => nextPoem()}>
@@ -133,14 +151,15 @@ function Sentence() {
           <h5>Type definitions</h5>
           <ul>
             <li>1 = 'The' adjective concrete_noun verb preposition article adjective common_noun.</li>
-            <li>2 = article common_noun verb.</li>
+            <li>2 = article concrete_noun verb.</li>
             <li>3 = common_noun verb preposition article adjective common_noun.</li>
-            <li>4 = article common_noun verb preposition article common_noun.</li>
+            <li>4 = article common_noun verb preposition article concrete_nou.</li>
             <li>5 = Type 1 , Type 3 </li>
+            <li>6 = An|A concrete_noun verb </li>
           </ul>
       </details>
       </div>
   );
 }
 
-export default Sentence;
+export default PoemGenerator;

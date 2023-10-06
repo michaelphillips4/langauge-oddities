@@ -11,6 +11,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout />}>
+      <Route index element={<PoemGenerator/>} />
         <Route path="TimVineJokes" element={<Jokes />} />
         <Route path="PoemGenerator" element={<PoemGenerator />} />
      

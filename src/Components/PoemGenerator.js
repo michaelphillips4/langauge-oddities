@@ -125,10 +125,7 @@ function PoemGenerator() {
 
   // console.log(poem.usedValues);
 
-  const [poem, setPoem] = useState({
-    numberOfLines: 0,
-    lines: []
-  });
+  const [poem, setPoem] = useState(createPoem());
 
 
   return (

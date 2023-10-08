@@ -1,28 +1,17 @@
 import data from "./Data/SentenceParts.json";
 
-export default class PoemEngine {
+class PoemEngine {
 
   constructor() {
-    this.lastRand = 0;
-    this.usedValues = {};
-    this.data = data;
+    this.usedValues = {}; 
   }
 
-  setUsedValues(v) { this.usedValues = v; }
+  getRandFromArrayInner = (array) => { return array[Math.floor((Math.random() * array.length - 1) + 1)]; }
 
-  getRand() {
-    let r = Math.random();
-    while (r === this.lastRand) { r = Math.random(); }
-    this.lastRand = r;
-    return r;
-  }
-
-  getRandFromArrayInner(array) { return array[Math.floor((this.getRand() * array.length - 1) + 1)]; }
-
-  tryGetUnusedValue(array, name) {
+  tryGetUnusedValue = (array, name) => {
 
     let value = this.getRandFromArrayInner(array);
-
+ 
     if (this.usedValues.hasOwnProperty(name) && this.usedValues[name].length < array.length) {
 
       while (this.usedValues[name].includes(value)) {
@@ -34,13 +23,11 @@ export default class PoemEngine {
   }
 
   setUnusedValues(name, value) {
-    const clone = this.usedValues;
-    if (!clone.hasOwnProperty(name)) {
-      clone[name] = [];
+    if (!this.usedValues.hasOwnProperty(name)) {
+      this.usedValues[name] = [];
     }
-    clone[name].push(value);
-    this.setUsedValues(clone);
-  }
+    this.usedValues[name].push(value);
+  } 
 
   getRandFromArray(array, name) {
     let value = this.tryGetUnusedValue(array, name);
@@ -77,6 +64,8 @@ export default class PoemEngine {
     let d = {};
     d.numberOfLines = numLines + 1;
     d.lines = [];
+    d.usedValues = this.usedValues;
+    d.allData = data;
     for (let i = 0; i < numLines + 1; i++) {
       const numType = this.randomRange(0, 6);
       const lineInfo = {};
@@ -92,11 +81,12 @@ export default class PoemEngine {
     return d;
   }
 
-  nextPoem() {
 
-    this.usedValues = {};
+}
 
-    return this.createPoem();
+export default function nextPoem(){
 
-  }
+  const poemEngine = new PoemEngine(); 
+  return poemEngine.createPoem();
+
 }

@@ -1,10 +1,10 @@
-import PoemEngine from '../PoemEngine';
+import nextPoem from '../PoemEngine';
 import React, { useState } from 'react';
 
 function PoemGenerator() {
 
-  const poemEngine = new PoemEngine();
-  const [poem, setPoem] = useState(poemEngine.nextPoem());
+  console.log(nextPoem());
+  const [poemInfo, setPoemInfo] = useState(nextPoem());
 
   const displayPoem = (a) => a.map((s, index) => <div key={index}>{s.text}</div>)
 
@@ -17,22 +17,22 @@ function PoemGenerator() {
 
   return (
     <div>
-      <button className="button" onClick={() => setPoem(poemEngine.nextPoem())}>
+      <button className="button" onClick={() => setPoemInfo(nextPoem())}>
         Create New
       </button>
       <blockquote>
-        {displayPoem(poem.lines)}
+        {displayPoem(poemInfo.lines)}
       </blockquote>
       <details>
         <summary>Debug Trace Info</summary>
-        Created {poem.numberOfLines} line poem.
+        Created {poemInfo.numberOfLines} line poem.
         <br />
         <h5>Generated Sentences</h5>
-        <ul>{displayPoemInfo(poem.lines)}</ul>
+        <ul>{displayPoemInfo(poemInfo.lines)}</ul>
         <h5>Data set - used Values</h5>
-        <ul>{displayUsedValuesInfo(poemEngine.usedValues)}</ul>
+        <ul>{displayUsedValuesInfo(poemInfo.usedValues)}</ul> 
         <h5>Data set - all avaliable values</h5>
-        <ul>{displayUsedValuesInfo(poemEngine.data)}</ul>
+        <ul>{displayUsedValuesInfo(poemInfo.allData)}</ul>
         <h5>Sentence Types definitions</h5>
         <ul>
           <li>1 = 'The' adjective concrete_noun verb preposition article adjective common_noun.</li>

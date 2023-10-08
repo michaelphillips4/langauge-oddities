@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 function PoemGenerator() {
 
-  console.log(nextPoem());
   const [poemInfo, setPoemInfo] = useState(nextPoem());
 
   const displayPoem = (a) => a.map((s, index) => <div key={index}>{s.text}</div>)

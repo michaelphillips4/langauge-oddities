@@ -1,9 +1,9 @@
-import nextPoem from '../PoemEngine';
+import  createPoem from '../PoemEngine';
 import React, { useState } from 'react';
 
 function PoemGenerator() {
 
-  const [poemInfo, setPoemInfo] = useState(nextPoem());
+  const [poemInfo, setPoemInfo] = useState(createPoem());
 
   const displayPoem = (a) => a.map((s, index) => <div key={index}>{s.text}</div>)
 
@@ -16,7 +16,7 @@ function PoemGenerator() {
 
   return (
     <div>
-      <button className="button" onClick={() => setPoemInfo(nextPoem())}>
+      <button className="button" onClick={() => setPoemInfo(createPoem())}>
         Create New
       </button>
       <blockquote>

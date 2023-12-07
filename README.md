@@ -12,7 +12,7 @@ Values from the dataset are then merged into sentence. <br />
 
 
 ## Tech stack
-It uses react  https://react.dev/ using the vite https://vitejs.dev/ and type script <br />
+It uses react  https://react.dev/ using vite https://vitejs.dev/ and type script <br />
 It is deployed to AWS using amplify linked to this github account.<br />
 > I uses the simple css frame work for the style https://simplecss.org/ it is classless and allows you to create smart pages quickly with out the distraction of styles.
 

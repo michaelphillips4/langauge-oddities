@@ -1,6 +1,6 @@
-import {createPoem} from '../PoemMachine';
-import { useState } from 'react';
-import {LineInfo} from "../Definitions" ;
+import {createPoem} from '../createPoem';
+import {useState } from 'react';
+import {LineInfo} from "../definitions" ;
 import PoemDataSetInfo from "./PoemDatasetInfo";
 
 function PoemGenerator() {

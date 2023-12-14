@@ -1,4 +1,4 @@
-import {PoemInfo,LineInfo} from "../Definitions" ;
+import {PoemInfo,LineInfo} from "../definitions" ;
 
 interface PoemDataSetInfoProps {
     poemInfo: PoemInfo;
@@ -32,7 +32,7 @@ export default function PoemDataSetInfo({poemInfo}: PoemDataSetInfoProps) {
           <li>3 = common_noun verb preposition article adjective common_noun.</li>
           <li>4 = article common_noun verb preposition article concrete_noun.</li>
           <li>5 = Type 1 , Type 3 </li>
-          <li>6 = An|A concrete_noun verb </li>
+          <li>6 = An | A concrete_noun verb </li>
         </ul>
       </details>
   );
